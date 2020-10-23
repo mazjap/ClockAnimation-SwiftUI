@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0E01DC5125439009006D4369 /* AnimatedClock_SwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E01DC5025439009006D4369 /* AnimatedClock_SwiftUIApp.swift */; };
-		0E01DC5325439009006D4369 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E01DC5225439009006D4369 /* ContentView.swift */; };
+		0E01DC5325439009006D4369 /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E01DC5225439009006D4369 /* ClockView.swift */; };
 		0E01DC552543900E006D4369 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E01DC542543900E006D4369 /* Assets.xcassets */; };
 		0E01DC582543900E006D4369 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E01DC572543900E006D4369 /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -16,7 +16,7 @@
 /* Begin PBXFileReference section */
 		0E01DC4D25439009006D4369 /* AnimatedClock-SwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AnimatedClock-SwiftUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0E01DC5025439009006D4369 /* AnimatedClock_SwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedClock_SwiftUIApp.swift; sourceTree = "<group>"; };
-		0E01DC5225439009006D4369 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		0E01DC5225439009006D4369 /* ClockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockView.swift; sourceTree = "<group>"; };
 		0E01DC542543900E006D4369 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E01DC572543900E006D4369 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0E01DC592543900E006D4369 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -53,7 +53,7 @@
 			isa = PBXGroup;
 			children = (
 				0E01DC5025439009006D4369 /* AnimatedClock_SwiftUIApp.swift */,
-				0E01DC5225439009006D4369 /* ContentView.swift */,
+				0E01DC5225439009006D4369 /* ClockView.swift */,
 				0E01DC542543900E006D4369 /* Assets.xcassets */,
 				0E01DC592543900E006D4369 /* Info.plist */,
 				0E01DC562543900E006D4369 /* Preview Content */,
@@ -138,7 +138,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E01DC5325439009006D4369 /* ContentView.swift in Sources */,
+				0E01DC5325439009006D4369 /* ClockView.swift in Sources */,
 				0E01DC5125439009006D4369 /* AnimatedClock_SwiftUIApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
