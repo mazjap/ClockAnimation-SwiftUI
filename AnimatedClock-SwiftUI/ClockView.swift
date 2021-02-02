@@ -10,13 +10,14 @@ import SwiftUI
 struct ClockView: View {
     private typealias ClockData = (rotation: Angle, xOffset: CGFloat, yOffset: CGFloat)
     
-    @State var color: Color
+    let secondHandColor: Color?
+    let defaultHandColor: Color
     
-    @State private var secondData: ClockData = (.zero, 0, 0)
-    @State private var minuteData: ClockData = (.zero, 0, 0)
-    @State private var hourData:   ClockData = (.zero, 0, 0)
+    @State private var secondAngle: Angle = .zero
+    @State private var minuteAngle: Angle = .zero
+    @State private var hourAngle: Angle = .zero
     
-    private let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    private let timer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()
     
     private let secondWidth: CGFloat = 4
     private let minuteWidth: CGFloat = 6
@@ -26,6 +27,11 @@ struct ClockView: View {
     private let minuteMult: CGFloat = 0.8
     private let hourMult:   CGFloat = 0.7
     
+    init(color: Color = .black, secondColor: Color? = nil) {
+        self.defaultHandColor = color
+        self.secondHandColor = secondColor
+    }
+    
     var body: some View {
         GeometryReader { geometry in
             
@@ -34,34 +40,49 @@ struct ClockView: View {
                 
                 // Boundry
                 Circle()
-                    .foregroundColor(color)
+                    .foregroundColor(defaultHandColor)
                 Circle()
                     .foregroundColor(.white)
-                    .frame(width: geometry.size.width * 0.95, height: geometry.size.height * 0.95)
-                
-                
-                // Second hand
-                RoundedRectangle(cornerRadius: secondWidth / 2)
-                    .foregroundColor(color)
-                    .frame(width: secondWidth, height: geometry.size.width * secondMult / 2)
-                    .offset(x: secondData.xOffset, y: secondData.yOffset)
-                    .rotationEffect(secondData.rotation)
-                
-                // Minute hand
-                RoundedRectangle(cornerRadius: minuteWidth / 2)
-                    .foregroundColor(color)
-                    .frame(width: minuteWidth, height: geometry.size.width * minuteMult / 2)
-                    .offset(x: minuteData.xOffset, y: minuteData.yOffset)
-                    .rotationEffect(minuteData.rotation)
+                    .padding(3)
                 
                 // Hour hand
                 RoundedRectangle(cornerRadius: hourWidth / 2)
-                    .foregroundColor(color)
+                    .foregroundColor(defaultHandColor)
                     .frame(width: hourWidth, height: geometry.size.width * hourMult / 2)
-                    .offset(x: hourData.xOffset, y: hourData.yOffset)
-                    .rotationEffect(hourData.rotation)
+                    .offset(y: -geometry.size.width * hourMult / 4)
+                    .rotationEffect(hourAngle)
+                
+                // Minute hand
+                RoundedRectangle(cornerRadius: minuteWidth / 2)
+                    .foregroundColor(defaultHandColor)
+                    .frame(width: minuteWidth, height: geometry.size.width * minuteMult / 2)
+                    .offset(y: -geometry.size.width * minuteMult / 4)
+                    .rotationEffect(minuteAngle)
+                
+                // Second hand
+                RoundedRectangle(cornerRadius: secondWidth / 2)
+                    .foregroundColor(secondHandColor ?? defaultHandColor)
+                    .frame(width: secondWidth, height: geometry.size.width * secondMult / 2)
+                    .offset(y: -geometry.size.width * secondMult / 4)
+                    .rotationEffect(secondAngle)
             }
-            
+            .onReceive(timer) { _ in
+                let now = Date(), calendar = Calendar.current
+                
+                let seconds = CGFloat(calendar.component(.second, from: now))
+                let minutes = CGFloat(calendar.component(.minute, from: now)) + seconds / 60
+                let hours = CGFloat(calendar.component(.hour, from: now)) + minutes / 60
+                
+                let sProgress = seconds / 60
+                let mProgress = minutes / 60
+                let hProgress = (hours > 12 ? hours - 12 : hours) / 12
+                
+                withAnimation {
+                    secondAngle = angle(from: sProgress)
+                    minuteAngle = angle(from: mProgress)
+                    hourAngle = angle(from: hProgress)
+                }
+            }
         }
         .padding()
     }
@@ -73,6 +94,6 @@ struct ClockView: View {
 
 struct ClockView_Previews: PreviewProvider {
     static var previews: some View {
-        ClockView(color: .red)
+        ClockView()
     }
 }

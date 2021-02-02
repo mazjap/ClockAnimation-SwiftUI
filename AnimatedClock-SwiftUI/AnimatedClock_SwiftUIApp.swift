@@ -11,7 +11,7 @@ import SwiftUI
 struct AnimatedClock_SwiftUIApp: App {
     var body: some Scene {
         WindowGroup {
-            ClockView(color: .red)
+            ClockView(color: .black, secondColor: .red)
         }
     }
 }
